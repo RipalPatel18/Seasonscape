@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seasonal Calendar</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+
+    <div id="fxLayer" class="fx-layer" aria-hidden="true"></div>
+
+    <main class="wrap">
+        <section id="calendar" class="calendar-container" aria-label="Seasonal calendar">
+
+            <!-- Scene layer  -->
+            <div class="scene" aria-hidden="true">
+                <div class="orb" aria-hidden="true"></div>
+                <div class="cloud c1" aria-hidden="true"></div>
+                <div class="cloud c2" aria-hidden="true"></div>
+                <div class="cloud c3" aria-hidden="true"></div>
+                <div class="ridge r1" aria-hidden="true"></div>
+                <div class="ridge r2" aria-hidden="true"></div>
+            </div>
+
+            <header class="calendar-header">
+                <button id="prevMonth" class="icon-btn" aria-label="Previous month">‹</button>
+
+                <div class="header-center">
+                    <div id="currentMonthYear" class="month-title">Month Year</div>
+
+                    <div class="sub-row">
+                        <span id="seasonLabel" class="pill">Auto • Season</span>
+
+                        <label class="sr-only" for="seasonMode">Season mode</label>
+                        <select id="seasonMode" class="select">
+                            <option value="auto" selected>Auto</option>
+                            <option value="spring">Spring</option>
+                            <option value="summer">Summer</option>
+                            <option value="autumn">Autumn</option>
+                            <option value="winter">Winter</option>
+                        </select>
+                    </div>
+
+                    <!-- season progress bar -->
+                    <div class="seasonbar" aria-hidden="true">
+                        <span id="seasonBarFill" class="seasonbar-fill"></span>
+                    </div>
+                </div>
+
+                <button id="nextMonth" class="icon-btn" aria-label="Next month">›</button>
+            </header>
+
+            <div class="calendar-weekdays" aria-hidden="true">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+
+           
+            <div id="gridWrap" class="grid-wrap">
+                <div id="calendarDays" class="calendar-days" role="grid" aria-label="Days"></div>
+            </div>
+
+            <footer class="calendar-footer">
+                <div class="hint">
+                    Hover a day to flip ✨ • Weekends glow • Use <kbd>←</kbd> <kbd>→</kbd> for months
+                </div>
+            </footer>
+        </section>
+    </main>
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>

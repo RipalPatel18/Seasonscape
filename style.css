@@ -1,0 +1,618 @@
+:root {
+    --text: #0f172a;
+    --muted: #64748b;
+    --shadow: 0 18px 50px rgba(2, 6, 23, 0.18);
+    --radius: 22px;
+    --cellRadius: 14px;
+
+    --spring1: #22c55e;
+    --spring2: #86efac;
+    --summer1: #f59e0b;
+    --summer2: #fde68a;
+    --autumn1: #b45309;
+    --autumn2: #fdba74;
+    --winter1: #0ea5e9;
+    --winter2: #bae6fd;
+
+    --accent: #3b82f6;
+    --accent2: #60a5fa;
+    --season-emoji: "✨";
+
+
+    --g-spring: linear-gradient(135deg, #34d399, #a7f3d0, #ffffff);
+    --g-summer: linear-gradient(135deg, #fbbf24, #fde68a, #ffffff);
+    --g-autumn: linear-gradient(135deg, #fb923c, #fdba74, #fff7ed);
+    --g-winter: linear-gradient(135deg, #38bdf8, #bae6fd, #ffffff);
+
+
+    --g2-spring: linear-gradient(135deg, rgba(16, 185, 129, .35), rgba(167, 243, 208, .15));
+    --g2-summer: linear-gradient(135deg, rgba(245, 158, 11, .35), rgba(253, 230, 138, .16));
+    --g2-autumn: linear-gradient(135deg, rgba(234, 88, 12, .32), rgba(253, 186, 116, .16));
+    --g2-winter: linear-gradient(135deg, rgba(14, 165, 233, .35), rgba(186, 230, 253, .16));
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    color: var(--text);
+    overflow: hidden;
+
+    /* default fallback */
+    background:
+        radial-gradient(circle at 18% 12%, rgba(255, 255, 255, .85), transparent 45%),
+        linear-gradient(135deg, #eef2ff, #ffffff);
+}
+
+.fx-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.wrap {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.calendar-container {
+    width: min(620px, 100%);
+    background:
+        radial-gradient(circle at 25% 0%, rgba(255, 255, 255, .92), rgba(255, 255, 255, .62)),
+        linear-gradient(180deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    position: relative;
+}
+
+/* ---------- scene  ---------- */
+.scene {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* soft sky glow */
+.scene::before {
+    content: "";
+    position: absolute;
+    inset: -30% -30% auto -30%;
+    height: 60%;
+    background:
+        radial-gradient(circle at 18% 35%, color-mix(in oklab, var(--accent2) 40%, white), transparent 62%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, .70), transparent 55%),
+        radial-gradient(circle at 55% 8%, rgba(255, 255, 255, .55), transparent 50%);
+    opacity: .9;
+}
+
+/* sun/moon orb */
+.orb {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    width: 74px;
+    height: 74px;
+    border-radius: 999px;
+    background:
+        radial-gradient(circle at 30% 25%, rgba(255, 255, 255, .96),
+            color-mix(in oklab, var(--accent2) 60%, white));
+    box-shadow:
+        0 0 0 14px color-mix(in oklab, var(--accent2) 16%, transparent),
+        0 0 0 30px color-mix(in oklab, var(--accent2) 9%, transparent);
+    opacity: .95;
+    animation: orbFloat 6.2s ease-in-out infinite;
+}
+
+@keyframes orbFloat {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(7px);
+    }
+}
+
+/* ridges/hills */
+.ridge {
+    position: absolute;
+    left: -10%;
+    width: 120%;
+    height: 230px;
+    top: 145px;
+    opacity: .85;
+    background:
+        radial-gradient(120% 95% at 18% 10%, color-mix(in oklab, var(--accent2) 52%, white), transparent 58%),
+        radial-gradient(120% 95% at 70% 18%, color-mix(in oklab, var(--accent) 44%, white), transparent 62%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .40));
+}
+
+.r2 {
+    top: 185px;
+    opacity: .58;
+    filter: blur(.3px);
+}
+
+/* ---------- header ---------- */
+.calendar-header {
+    padding: 18px;
+    display: grid;
+    grid-template-columns: 44px 1fr 44px;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(148, 163, 184, .28);
+    position: relative;
+    z-index: 1;
+
+    /* premium seasonal header */
+    background:
+        radial-gradient(circle at 15% 10%, rgba(255, 255, 255, .72), transparent 60%),
+        var(--pageGrad2),
+        linear-gradient(135deg, rgba(255, 255, 255, .60), rgba(255, 255, 255, .45));
+}
+
+/* light sweep */
+.calendar-header::after {
+    content: "";
+    position: absolute;
+    left: -40%;
+    top: 0;
+    height: 100%;
+    width: 80%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .55), transparent);
+    transform: skewX(-18deg);
+    opacity: .26;
+    animation: sheen 6s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes sheen {
+    0% {
+        transform: translateX(-80%) skewX(-18deg);
+    }
+
+    100% {
+        transform: translateX(220%) skewX(-18deg);
+    }
+}
+
+.header-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.month-title {
+    font-size: 1.65rem;
+    font-weight: 950;
+    letter-spacing: -0.02em;
+}
+
+.sub-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pill {
+    font-size: .85rem;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, .38);
+    color: var(--muted);
+    background: rgba(255, 255, 255, .55);
+}
+
+.select {
+    border-radius: 12px;
+    padding: 8px 10px;
+    border: 1px solid rgba(148, 163, 184, .45);
+    background: rgba(255, 255, 255, .70);
+    outline: none;
+    font-weight: 900;
+    color: var(--text);
+}
+
+.select:focus {
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 22%, transparent);
+    border-color: color-mix(in oklab, var(--accent) 55%, white);
+}
+
+.icon-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    border: 1px solid rgba(148, 163, 184, .40);
+    background: rgba(255, 255, 255, .72);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    font-size: 1.6rem;
+    font-weight: 950;
+    transition: transform .15s ease, background .2s ease;
+}
+
+.icon-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, .92);
+}
+
+.icon-btn:active {
+    transform: translateY(0px);
+}
+
+/* season progress bar */
+.seasonbar {
+    width: min(340px, 100%);
+    height: 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, .28);
+    background: rgba(255, 255, 255, .42);
+    overflow: hidden;
+}
+
+.seasonbar-fill {
+    display: block;
+    height: 100%;
+    width: 45%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    box-shadow: 0 10px 22px rgba(2, 6, 23, .12);
+    transition: width .45s cubic-bezier(.2, .8, .2, 1);
+}
+
+/* weekdays + grid wrapper */
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    padding: 16px 16px 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.calendar-weekdays div {
+    text-align: center;
+    font-size: .9rem;
+    font-weight: 950;
+    color: color-mix(in oklab, var(--muted) 80%, #000);
+}
+
+.grid-wrap {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    padding: 0 16px 18px;
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform .35s cubic-bezier(.2, .8, .2, 1), opacity .25s ease;
+}
+
+.calendar-days.slide-left {
+    transform: translateX(-14px);
+    opacity: 0;
+}
+
+.calendar-days.slide-right {
+    transform: translateX(14px);
+    opacity: 0;
+}
+
+/* ---------- flip day cards ---------- */
+.day {
+    min-height: 66px;
+    border-radius: var(--cellRadius);
+    background: transparent;
+    cursor: pointer;
+    user-select: none;
+    perspective: 900px;
+    padding: 0;
+    border: none;
+}
+
+.day.other-month {
+    opacity: .38;
+    cursor: default;
+    perspective: none;
+}
+
+.day-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform .38s cubic-bezier(.2, .8, .2, 1);
+    border-radius: var(--cellRadius);
+
+    border: 1px solid rgba(148, 163, 184, .28);
+    background:
+        radial-gradient(circle at 25% 15%, rgba(255, 255, 255, .82), rgba(255, 255, 255, .40)),
+        linear-gradient(135deg, rgba(255, 255, 255, .55), rgba(255, 255, 255, .25));
+    box-shadow: 0 10px 24px rgba(2, 6, 23, .08);
+}
+
+.day:hover .day-inner {
+    transform: rotateY(180deg) translateY(-2px);
+}
+
+.day:active .day-inner {
+    transform: rotateY(180deg) scale(.985);
+}
+
+.day.other-month:hover .day-inner {
+    transform: none;
+}
+
+.face {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    border-radius: var(--cellRadius);
+    backface-visibility: hidden;
+}
+
+/* front */
+.front {
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, .90), rgba(255, 255, 255, .55));
+}
+
+
+.back {
+    transform: rotateY(180deg);
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, .78), transparent 60%),
+        var(--pageGrad2),
+        linear-gradient(135deg,
+            color-mix(in oklab, var(--accent) 45%, white),
+            color-mix(in oklab, var(--accent2) 25%, white));
+    border: 1px solid rgba(255, 255, 255, .34);
+}
+
+.num {
+    font-weight: 950;
+    font-size: 1.08rem;
+}
+
+.back::before {
+    content: var(--season-emoji);
+    font-size: 1.3rem;
+    filter: drop-shadow(0 10px 16px rgba(2, 6, 23, .18));
+}
+
+.back::after {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border-radius: 12px;
+    background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, .62), transparent 60%);
+    opacity: .65;
+    pointer-events: none;
+}
+
+/* today pulse ring */
+.day.today .day-inner {
+    border-color: color-mix(in oklab, var(--accent) 62%, white);
+    box-shadow: 0 14px 30px color-mix(in oklab, var(--accent) 18%, transparent);
+}
+
+.day.today .front::after {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border-radius: 12px;
+    border: 2px solid color-mix(in oklab, var(--accent) 55%, white);
+    opacity: .55;
+    animation: pulse 1.9s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: .45;
+    }
+
+    50% {
+        transform: scale(1.045);
+        opacity: .78;
+    }
+}
+
+/* weekends glow */
+.day.weekend .day-inner {
+    box-shadow: 0 16px 34px color-mix(in oklab, var(--accent2) 18%, transparent);
+}
+
+.day.weekend .front {
+    background:
+        radial-gradient(circle at 35% 18%, rgba(255, 255, 255, .95), rgba(255, 255, 255, .55));
+}
+
+/* footer */
+.calendar-footer {
+    padding: 0 16px 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.hint {
+    color: var(--muted);
+    font-size: .92rem;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+kbd {
+    border: 1px solid rgba(148, 163, 184, .55);
+    border-bottom-width: 3px;
+    background: rgba(255, 255, 255, .7);
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-weight: 950;
+}
+
+/* ---------- seasons (set gradient vars + accents) ---------- */
+.season-spring {
+    --accent: var(--spring1);
+    --accent2: var(--spring2);
+    --season-emoji: "🌸";
+    --pageGrad: var(--g-spring);
+    --pageGrad2: var(--g2-spring);
+}
+
+.season-summer {
+    --accent: var(--summer1);
+    --accent2: var(--summer2);
+    --season-emoji: "☀️";
+    --pageGrad: var(--g-summer);
+    --pageGrad2: var(--g2-summer);
+}
+
+.season-autumn {
+    --accent: var(--autumn1);
+    --accent2: var(--autumn2);
+    --season-emoji: "🍂";
+    --pageGrad: var(--g-autumn);
+    --pageGrad2: var(--g2-autumn);
+}
+
+.season-winter {
+    --accent: var(--winter1);
+    --accent2: var(--winter2);
+    --season-emoji: "❄️";
+    --pageGrad: var(--g-winter);
+    --pageGrad2: var(--g2-winter);
+}
+
+
+body:has(.calendar-container.season-spring) {
+    background:
+        radial-gradient(circle at 18% 12%, rgba(255, 255, 255, .88), transparent 45%),
+        radial-gradient(circle at 78% 22%, rgba(255, 255, 255, .65), transparent 45%),
+        var(--g-spring);
+}
+
+body:has(.calendar-container.season-summer) {
+    background:
+        radial-gradient(circle at 18% 12%, rgba(255, 255, 255, .86), transparent 45%),
+        radial-gradient(circle at 78% 22%, rgba(255, 255, 255, .60), transparent 45%),
+        var(--g-summer);
+}
+
+body:has(.calendar-container.season-autumn) {
+    background:
+        radial-gradient(circle at 18% 12%, rgba(255, 255, 255, .86), transparent 45%),
+        radial-gradient(circle at 78% 22%, rgba(255, 255, 255, .62), transparent 45%),
+        var(--g-autumn);
+}
+
+body:has(.calendar-container.season-winter) {
+    background:
+        radial-gradient(circle at 18% 12%, rgba(255, 255, 255, .90), transparent 45%),
+        radial-gradient(circle at 78% 22%, rgba(255, 255, 255, .66), transparent 45%),
+        var(--g-winter);
+}
+
+
+.fx {
+    position: absolute;
+    top: -10vh;
+    left: 0;
+    border-radius: 999px;
+    opacity: .95;
+    animation: fall linear infinite;
+    pointer-events: none;
+    filter: drop-shadow(0 10px 20px rgba(2, 6, 23, .12));
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: .95;
+    }
+
+    100% {
+        transform: translateY(110vh) translateX(var(--drift, 0px)) rotate(var(--spin, 180deg));
+        opacity: 0;
+    }
+}
+
+.fx.snow {
+    background: #fff;
+}
+
+.fx.petal {
+    background: radial-gradient(circle at 30% 30%, #fff, #fbcfe8);
+    border-radius: 70% 30% 70% 30%;
+}
+
+.fx.leaf {
+    background: radial-gradient(circle at 30% 30%, #fde68a, #fb923c);
+    border-radius: 70% 0 70% 0;
+}
+
+.fx.sun {
+    background: radial-gradient(circle at 30% 30%, #fff, #fde68a);
+    box-shadow: 0 0 0 6px rgba(253, 230, 138, .20),
+        0 0 0 14px rgba(253, 230, 138, .12);
+}
+
+/* a11y helper */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+@media (max-width: 600px) {
+    .month-title {
+        font-size: 1.38rem;
+    }
+
+    .day {
+        min-height: 58px;
+    }
+
+    .seasonbar {
+        width: 92%;
+    }
+}
