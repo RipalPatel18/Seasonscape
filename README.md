@@ -1,66 +1,68 @@
-# 🌤️ Solara Seasons  
-### Animated Seasonal Calendar UI (HTML · CSS · JavaScript)
+# 🌿 Seasonscape  
+### An Animated Seasonal Calendar UI (HTML · CSS · JavaScript)
 
-**Solara Seasons** is a visually rich, interactive seasonal calendar built using **pure HTML, CSS, and JavaScript**.  
-It dynamically adapts its **gradients, animations, and atmosphere** based on the current season, creating a smooth and immersive user experience.
+**Seasonscape** is a visually immersive seasonal calendar that transforms with time.  
+Built using **pure HTML, CSS, and JavaScript**, it blends **gradient-driven design**, smooth animations, and seasonal ambience to create a living calendar experience.
 
-This project focuses on **UI/UX polish, motion design, and modern CSS techniques**, making it ideal for portfolios and front-end showcases.
+This project highlights **modern UI design, CSS creativity, and front-end interaction**, making it ideal for portfolios and UI showcases.
 
 ---
 
 ## ✨ Features
 
-- 🌸 **Season-Aware Design**
-  - Automatically detects Spring, Summer, Autumn, and Winter
-  - Manual season override available
+- 🌸 **Season-Aware Interface**
+  - Automatically adapts to Spring, Summer, Autumn, and Winter
+  - Manual season selector for exploration
 
 - 🎨 **Premium Seasonal Gradients**
-  - Full-page gradient backgrounds per season
-  - Matching header, card, and accent gradients
+  - Full-page background gradients per season
+  - Coordinated header, cards, and accent colors
+  - Glassmorphism-inspired UI
 
-- 🌀 **Animated Calendar Experience**
-  - Smooth month navigation with slide transitions
+- 🌀 **Smooth Interactions & Motion**
+  - Animated month transitions (slide + fade)
   - Flip-card day tiles with seasonal icons
-  - Today highlight with pulse animation
+  - “Today” pulse highlight
   - Weekend glow styling
 
 - ❄️ **Seasonal Ambient Effects**
-  - Snow (Winter)
-  - Petals (Spring)
-  - Sun sparkles (Summer)
-  - Falling leaves (Autumn)
+  - Snowfall for Winter
+  - Petals for Spring
+  - Sun sparkles for Summer
+  - Falling leaves for Autumn
 
-- ⌨️ **Keyboard Navigation**
+- ⌨️ **Keyboard Support**
   - Navigate months using ← / → arrow keys
 
 - 📱 **Responsive Design**
-  - Optimized for desktop, tablet, and mobile screens
+  - Optimized for desktop, tablet, and mobile
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **HTML5** – Semantic structure  
-- **CSS3** – Gradients, animations, 3D transforms, glassmorphism  
-- **JavaScript (Vanilla)** – Calendar logic, transitions, seasonal behavior  
+- **HTML5** — Semantic structure  
+- **CSS3** — Gradients, animations, 3D transforms, glassmorphism  
+- **JavaScript (Vanilla)** — Calendar logic, transitions, seasonal behavior  
 
-> ⚠️ No frameworks, no libraries, no dependencies.
+> 🚫 No frameworks. No libraries. No dependencies.
 
 ---
 
-## 🎯 Purpose
+## 🎯 Project Goals
 
-This project was built to:
-- Demonstrate **creative front-end UI design**
-- Explore **CSS gradients & motion**
-- Showcase **season-driven visual logic**
-- Serve as a **portfolio-ready UI component**
+Seasonscape was built to:
+
+- Showcase **creative front-end UI design**
+- Explore **advanced CSS gradients and animations**
+- Demonstrate **season-driven visual logic**
+- Serve as a **portfolio-ready interactive component**
 
 ---
 
 ## 📸 Preview
 
-> Add screenshots or a GIF here for GitHub / portfolio presentation.
+_Add screenshots or a short GIF here for best presentation._
 
 ```md
-![Solara Seasons Preview](./preview.png)
+![Seasonscape Preview](./preview.png)
