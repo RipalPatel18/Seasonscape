@@ -45,24 +45,8 @@ This project highlights **modern UI design, CSS creativity, and front-end intera
 - **CSS3** — Gradients, animations, 3D transforms, glassmorphism  
 - **JavaScript (Vanilla)** — Calendar logic, transitions, seasonal behavior  
 
-> 🚫 No frameworks. No libraries. No dependencies.
-
 ---
 
-## 🎯 Project Goals
+## 📸 Live Demo
 
-Seasonscape was built to:
-
-- Showcase **creative front-end UI design**
-- Explore **advanced CSS gradients and animations**
-- Demonstrate **season-driven visual logic**
-- Serve as a **portfolio-ready interactive component**
-
----
-
-## 📸 Preview
-
-_Add screenshots or a short GIF here for best presentation._
-
-```md
-![Seasonscape Preview](./preview.png)
+https://seasonscape.vercel.app/
